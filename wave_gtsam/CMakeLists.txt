@@ -10,11 +10,12 @@ WAVE_ADD_MODULE(${PROJECT_NAME} DEPENDS
     src/decaying_bias.cpp
     src/gps_factor_with_bias.cpp
     src/pose_vel.cpp
+    src/lidar_gps_range.cpp
+    src/positive_z.cpp
     src/pose_vel_bias.cpp)
 
 # Unit tests
 IF(BUILD_TESTING)
-
     # These tests also use wave_vision
     IF(TARGET wave::vision)
         WAVE_ADD_TEST(wave_gtsam_vo_offline_example
@@ -53,7 +54,9 @@ IF(BUILD_TESTING)
             ${PROJECT_NAME})
 
     WAVE_ADD_TEST(wave_gtsam_prior_test
-            tests/gtsam/prior_tests.cpp)
+            tests/gtsam/prior_tests.cpp
+            tests/gtsam/lidar_gps_range_test.cpp
+            tests/gtsam/positive_z_test.cpp)
     TARGET_LINK_LIBRARIES(wave_gtsam_prior_test
             ${PROJECT_NAME})
 ENDIF(BUILD_TESTING)
